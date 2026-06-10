@@ -1,0 +1,802 @@
+/dts-v1/;
+
+/* node '/' defined in zephyr/dts/common/skeleton.dtsi:9 */
+/ {
+	interrupt-parent = < &gic >;        /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:20 */
+	#address-cells = < 0x1 >;           /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:21 */
+	#size-cells = < 0x1 >;              /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:22 */
+	model = "Sipeed Lichee Zero";       /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:16 */
+	compatible = "sipeed,lichee-zero",
+	             "allwinner,sun8i-v3s"; /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:17 */
+
+	/* node '/chosen' defined in zephyr/dts/common/skeleton.dtsi:13 */
+	chosen {
+		zephyr,console = &uart0;    /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:20 */
+		zephyr,shell-uart = &uart0; /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:21 */
+		zephyr,sram = &ddr0;        /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:22 */
+		zephyr,entropy = &rng;      /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:23 */
+		zephyr,display = &mixer0;   /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:24 */
+	};
+
+	/* node '/aliases' defined in zephyr/dts/common/skeleton.dtsi:15 */
+	aliases {
+		sdhc0 = &mmc0; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:25 */
+		sdhc1 = &mmc1; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:26 */
+		sdhc2 = &mmc2; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:27 */
+	};
+
+	/* node '/soc' defined in zephyr/dts/arm/armv7-a.dtsi:10 */
+	soc {
+		compatible = "simple-bus"; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:68 */
+		#address-cells = < 0x1 >;  /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:69 */
+		#size-cells = < 0x1 >;     /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:70 */
+		ranges;                    /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:71 */
+
+		/* node '/soc/memory@40000' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:73 */
+		sram0: memory@40000 {
+			device_type = "memory";              /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:74 */
+			compatible = "zephyr,memory-region",
+			             "mmio-sram";            /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:75 */
+			reg = < 0x40000 0xb000 >;            /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:76 */
+			zephyr,memory-region = "SRAM0";      /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:77 */
+		};
+
+		/* node '/soc/memory@40000000' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:80 */
+		ddr0: memory@40000000 {
+			device_type = "memory";         /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:81 */
+			reg = < 0x40000000 0x4000000 >; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:82 */
+		};
+
+		/* node '/soc/system-control@1c00000' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:85 */
+		syscon: system-control@1c00000 {
+			compatible = "syscon";    /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:86 */
+			reg = < 0x1c00000 0xd0 >; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:87 */
+			status = "okay";          /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:88 */
+		};
+
+		/* node '/soc/rtc@1c20400' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:91 */
+		rtc: rtc@1c20400 {
+			compatible = "allwinner,sun8i-v3-rtc"; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:92 */
+			reg = < 0x1c20400 0x400 >;             /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:93 */
+			interrupts = < 0x0 0x28 0x2 0xa0 >,
+			             < 0x0 0x29 0x2 0xa0 >;    /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:94 */
+			clocks = < &osc32k >;                  /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:96 */
+			alarms-count = < 0x1 >;                /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:97 */
+			status = "okay";                       /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:232 */
+		};
+
+		/* node '/soc/clock-controller@1c20000' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:101 */
+		ccu: clock-controller@1c20000 {
+			compatible = "allwinner,sun8i-v3s-ccu"; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:102 */
+			status = "okay";                        /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:103 */
+			reg = < 0x1c20000 0x400 >;              /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:104 */
+			clocks = < &osc24M >,
+			         < &osc32k >;                   /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:105 */
+			clock-names = "hosc",
+			              "losc";                   /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:106 */
+			#clock-cells = < 0x1 >;                 /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:107 */
+			#reset-cells = < 0x1 >;                 /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:108 */
+			phandle = < 0x6 >;                      /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:170 */
+
+			/* node '/soc/clock-controller@1c20000/reset-controller' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:109 */
+			reset: reset-controller {
+				compatible = "allwinner,sun8i-v3s-ccu-reset"; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:110 */
+				#reset-cells = < 0x1 >;                       /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:111 */
+				status = "okay";                              /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:112 */
+				phandle = < 0x7 >;                            /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:231 */
+			};
+		};
+
+		/* node '/soc/interrupt-controller@1c81000' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:116 */
+		gic: interrupt-controller@1c81000 {
+			compatible = "arm,gic-400",
+			             "arm,gic-v2",
+			             "arm,gic";     /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:117 */
+			status = "okay";            /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:118 */
+			reg = < 0x1c81000 0x1000 >,
+			      < 0x1c82000 0x2000 >,
+			      < 0x1c84000 0x2000 >,
+			      < 0x1c86000 0x2000 >; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:119 */
+			interrupt-controller;       /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:123 */
+			#interrupt-cells = < 0x4 >; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:124 */
+			#address-cells = < 0x0 >;   /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:125 */
+			phandle = < 0x1 >;          /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:20 */
+		};
+
+		/* node '/soc/uart@1c28000' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:128 */
+		uart0: uart@1c28000 {
+			compatible = "ns16550",
+			             "snps,dw-apb-uart";   /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:129 */
+			reg = < 0x1c28000 0x400 >;         /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:130 */
+			reg-shift = < 0x2 >;               /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:131 */
+			interrupts = < 0x0 0x0 0x2 0xa0 >; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:132 */
+			clock-frequency = < 0x16e3600 >;   /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:134 */
+			dmas = < &dma 0x6 >,
+			       < &dma 0x6 >;               /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:135 */
+			dma-names = "tx",
+			            "rx";                  /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:137 */
+			pinctrl-0 = < &uart0_pins >;       /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:50 */
+			pinctrl-names = "default";         /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:51 */
+			status = "okay";                   /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:52 */
+			current-speed = < 0x1c200 >;       /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:53 */
+		};
+
+		/* node '/soc/uart@1c28400' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:141 */
+		uart1: uart@1c28400 {
+			compatible = "ns16550",
+			             "snps,dw-apb-uart";   /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:142 */
+			reg = < 0x1c28400 0x400 >;         /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:143 */
+			reg-shift = < 0x2 >;               /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:144 */
+			interrupts = < 0x0 0x1 0x2 0xa0 >; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:145 */
+			clock-frequency = < 0x16e3600 >;   /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:147 */
+			dmas = < &dma 0x7 >,
+			       < &dma 0x7 >;               /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:148 */
+			dma-names = "tx",
+			            "rx";                  /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:150 */
+			status = "disabled";               /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:151 */
+		};
+
+		/* node '/soc/uart@1c28800' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:154 */
+		uart2: uart@1c28800 {
+			compatible = "ns16550",
+			             "snps,dw-apb-uart";   /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:155 */
+			reg = < 0x1c28800 0x400 >;         /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:156 */
+			reg-shift = < 0x2 >;               /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:157 */
+			interrupts = < 0x0 0x2 0x2 0xa0 >; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:158 */
+			clock-frequency = < 0x16e3600 >;   /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:160 */
+			dmas = < &dma 0x8 >,
+			       < &dma 0x8 >;               /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:161 */
+			dma-names = "tx",
+			            "rx";                  /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:163 */
+			status = "disabled";               /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:164 */
+		};
+
+		/* node '/soc/pinctrl@1c20800' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:167 */
+		pinctrl: pinctrl@1c20800 {
+			compatible = "allwinner,sun8i-v3s-pinctrl"; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:168 */
+			reg = < 0x1c20800 0x400 >;                  /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:169 */
+			clocks = < &ccu 0x25 >,
+			         < &osc24M >,
+			         < &osc32k >;                       /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:170 */
+			clock-names = "bus",
+			              "hosc",
+			              "losc";                       /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:171 */
+			#address-cells = < 0x1 >;                   /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:172 */
+			#size-cells = < 0x0 >;                      /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:173 */
+			status = "okay";                            /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:65 */
+
+			/* node '/soc/pinctrl@1c20800/gpio@1' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:175 */
+			gpiob: gpio@1 {
+				compatible = "allwinner,sun8i-v3s-gpio"; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:176 */
+				reg = < 0x1 >;                           /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:177 */
+				interrupts = < 0x0 0xf 0x2 0xa0 >;       /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:178 */
+				gpio-controller;                         /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:179 */
+				#gpio-cells = < 0x2 >;                   /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:180 */
+				interrupt-controller;                    /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:181 */
+				#interrupt-cells = < 0x2 >;              /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:182 */
+				status = "okay";                         /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:132 */
+			};
+
+			/* node '/soc/pinctrl@1c20800/gpio@2' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:185 */
+			gpioc: gpio@2 {
+				compatible = "allwinner,sun8i-v3s-gpio"; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:186 */
+				reg = < 0x2 >;                           /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:187 */
+				gpio-controller;                         /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:188 */
+				#gpio-cells = < 0x2 >;                   /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:189 */
+				status = "disabled";                     /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:190 */
+			};
+
+			/* node '/soc/pinctrl@1c20800/gpio@3' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:192 */
+			gpiod: gpio@3 {
+				compatible = "allwinner,sun8i-v3s-gpio"; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:193 */
+				reg = < 0x3 >;                           /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:194 */
+				gpio-controller;                         /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:195 */
+				#gpio-cells = < 0x2 >;                   /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:196 */
+				status = "disabled";                     /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:197 */
+			};
+
+			/* node '/soc/pinctrl@1c20800/gpio@4' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:199 */
+			gpioe: gpio@4 {
+				compatible = "allwinner,sun8i-v3s-gpio"; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:200 */
+				reg = < 0x4 >;                           /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:201 */
+				gpio-controller;                         /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:202 */
+				#gpio-cells = < 0x2 >;                   /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:203 */
+				status = "okay";                         /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:136 */
+			};
+
+			/* node '/soc/pinctrl@1c20800/gpio@5' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:206 */
+			gpiof: gpio@5 {
+				compatible = "allwinner,sun8i-v3s-gpio"; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:207 */
+				reg = < 0x5 >;                           /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:208 */
+				gpio-controller;                         /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:209 */
+				#gpio-cells = < 0x2 >;                   /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:210 */
+				status = "okay";                         /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:140 */
+				phandle = < 0xb >;                       /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:183 */
+			};
+
+			/* node '/soc/pinctrl@1c20800/gpio@6' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:213 */
+			gpiog: gpio@6 {
+				compatible = "allwinner,sun8i-v3s-gpio"; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:214 */
+				reg = < 0x6 >;                           /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:215 */
+				interrupts = < 0x0 0x11 0x2 0xa0 >;      /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:216 */
+				gpio-controller;                         /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:217 */
+				#gpio-cells = < 0x2 >;                   /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:218 */
+				interrupt-controller;                    /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:219 */
+				#interrupt-cells = < 0x2 >;              /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:220 */
+				status = "okay";                         /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:144 */
+				phandle = < 0x16 >;                      /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:35 */
+			};
+
+			/* node '/soc/pinctrl@1c20800/default_state' defined in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:67 */
+			default_state {
+
+				/* node '/soc/pinctrl@1c20800/default_state/i2c0-pins' defined in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:68 */
+				i2c0_pins: i2c0-pins {
+					pinmux = < 0x226 >,
+					         < 0x227 >; /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:69 */
+					phandle = < 0xa >;  /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:155 */
+				};
+
+				/* node '/soc/pinctrl@1c20800/default_state/pwm-pins' defined in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:73 */
+				pwm_pins: pwm-pins {
+					pinmux = < 0x224 >,
+					         < 0x225 >; /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:74 */
+					phandle = < 0x8 >;  /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:226 */
+				};
+
+				/* node '/soc/pinctrl@1c20800/default_state/spi0-pins' defined in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:78 */
+				spi0_pins: spi0-pins {
+					pinmux = < 0x340 >,
+					         < 0x341 >,
+					         < 0x342 >,
+					         < 0x343 >; /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:79 */
+					phandle = < 0x9 >;  /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:148 */
+				};
+
+				/* node '/soc/pinctrl@1c20800/default_state/uart0-pins' defined in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:85 */
+				uart0_pins: uart0-pins {
+					pinmux = < 0x328 >,
+					         < 0x329 >;         /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:86 */
+					drive-strength = < 0x3 >;   /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:88 */
+					allwinner,pull = "pull_up"; /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:89 */
+					phandle = < 0x5 >;          /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:50 */
+				};
+
+				/* node '/soc/pinctrl@1c20800/default_state/mmc0-pins' defined in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:92 */
+				mmc0_pins: mmc0-pins {
+					pinmux = < 0x2a0 >,
+					         < 0x2a1 >,
+					         < 0x2a2 >,
+					         < 0x2a3 >,
+					         < 0x2a4 >,
+					         < 0x2a5 >;         /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:93 */
+					drive-strength = < 0x3 >;   /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:99 */
+					allwinner,pull = "pull_up"; /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:100 */
+					phandle = < 0xc >;          /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:198 */
+				};
+
+				/* node '/soc/pinctrl@1c20800/default_state/lcd-rgb-pins' defined in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:103 */
+				lcd_rgb_pins: lcd-rgb-pins {
+					pinmux = < 0x380 >,
+					         < 0x381 >,
+					         < 0x382 >,
+					         < 0x383 >,
+					         < 0x384 >,
+					         < 0x385 >,
+					         < 0x386 >,
+					         < 0x387 >,
+					         < 0x388 >,
+					         < 0x389 >,
+					         < 0x38a >,
+					         < 0x38b >,
+					         < 0x38c >,
+					         < 0x38d >,
+					         < 0x38e >,
+					         < 0x38f >,
+					         < 0x390 >,
+					         < 0x391 >,
+					         < 0x392 >,
+					         < 0x393 >,
+					         < 0x397 >,
+					         < 0x398 >;       /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:104 */
+					drive-strength = < 0x3 >; /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:126 */
+					phandle = < 0x13 >;       /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:248 */
+				};
+			};
+		};
+
+		/* node '/soc/dma-controller@1c02000' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:225 */
+		dma: dma-controller@1c02000 {
+			compatible = "allwinner,sun8i-v3s-dma"; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:226 */
+			reg = < 0x1c02000 0x1000 >;             /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:227 */
+			interrupts = < 0x0 0x32 0x2 0xa0 >;     /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:228 */
+			clocks = < &ccu 0x15 >;                 /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:230 */
+			resets = < &reset 0x6 >;                /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:231 */
+			#dma-cells = < 0x1 >;                   /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:232 */
+			dma-channels = < 0x8 >;                 /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:233 */
+			dma-requests = < 0x18 >;                /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:234 */
+			status = "okay";                        /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:235 */
+			phandle = < 0x4 >;                      /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:135 */
+		};
+
+		/* node '/soc/timer@1c20c00' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:238 */
+		timer0: timer@1c20c00 {
+			compatible = "allwinner,sun8i-v3s-timer"; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:239 */
+			reg = < 0x1c20c00 0xdc >;                 /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:240 */
+			clocks = < &osc24M >;                     /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:241 */
+			#address-cells = < 0x1 >;                 /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:242 */
+			#size-cells = < 0x0 >;                    /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:243 */
+			interrupts = < 0x0 0x12 0x2 0xa0 >,
+			             < 0x0 0x13 0x2 0xa0 >,
+			             < 0x0 0x14 0x2 0xa0 >;       /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:244 */
+			status = "okay";                          /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:57 */
+
+			/* node '/soc/timer@1c20c00/counter@0' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:249 */
+			counter0: counter@0 {
+				compatible = "allwinner,sun8i-v3s-counter"; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:250 */
+				reg = < 0x0 >;                              /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:251 */
+				clocks = < &osc24M >;                       /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:252 */
+				clock-source = < 0x1 >;                     /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:253 */
+				prescaler = < 0x0 >;                        /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:254 */
+				status = "okay";                            /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:60 */
+			};
+
+			/* node '/soc/timer@1c20c00/counter@1' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:258 */
+			counter1: counter@1 {
+				compatible = "allwinner,sun8i-v3s-counter"; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:259 */
+				reg = < 0x1 >;                              /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:260 */
+				clocks = < &osc24M >;                       /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:261 */
+				clock-source = < 0x1 >;                     /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:262 */
+				prescaler = < 0x0 >;                        /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:263 */
+				status = "disabled";                        /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:264 */
+			};
+
+			/* node '/soc/timer@1c20c00/counter@2' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:267 */
+			counter2: counter@2 {
+				compatible = "allwinner,sun8i-v3s-counter"; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:268 */
+				reg = < 0x2 >;                              /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:269 */
+				clocks = < &osc24M >;                       /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:270 */
+				clock-source = < 0x1 >;                     /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:271 */
+				prescaler = < 0x0 >;                        /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:272 */
+				status = "disabled";                        /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:273 */
+			};
+
+			/* node '/soc/timer@1c20c00/avs' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:276 */
+			avs0: avs {
+				compatible = "allwinner,sun8i-v3s-avs"; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:277 */
+				divisor = < 0x5db >;                    /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:278 */
+				status = "disabled";                    /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:279 */
+			};
+		};
+
+		/* node '/soc/pwm@1c21400' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:283 */
+		pwm: pwm@1c21400 {
+			compatible = "allwinner,sun8i-v3s-pwm"; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:284 */
+			reg = < 0x1c21400 0x400 >;              /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:285 */
+			#pwm-cells = < 0x2 >;                   /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:286 */
+			pinctrl-0 = < &pwm_pins >;              /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:226 */
+			pinctrl-names = "default";              /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:227 */
+			status = "okay";                        /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:228 */
+			phandle = < 0x14 >;                     /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:250 */
+		};
+
+		/* node '/soc/spi@1c68000' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:290 */
+		spi0: spi@1c68000 {
+			compatible = "allwinner,sun8i-v3s-spi"; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:291 */
+			reg = < 0x1c68000 0x1000 >;             /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:292 */
+			interrupts = < 0x0 0x41 0x2 0xa0 >;     /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:293 */
+			clocks = < &ccu 0x1c >,
+			         < &ccu 0x37 >;                 /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:294 */
+			clock-names = "bus",
+			              "mod";                    /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:295 */
+			resets = < &reset 0xf >;                /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:296 */
+			clock-frequency = < 0x16e3600 >;        /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:297 */
+			dmas = < &dma 0x17 >,
+			       < &dma 0x17 >;                   /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:298 */
+			dma-names = "tx",
+			            "rx";                       /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:299 */
+			#address-cells = < 0x1 >;               /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:300 */
+			#size-cells = < 0x0 >;                  /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:301 */
+			pinctrl-0 = < &spi0_pins >;             /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:148 */
+			pinctrl-names = "default";              /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:149 */
+			clock-source = < &osc24M >;             /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:150 */
+			status = "okay";                        /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:151 */
+		};
+
+		/* node '/soc/i2c@1c2ac00' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:305 */
+		i2c0: i2c@1c2ac00 {
+			compatible = "allwinner,sun8i-v3s-i2c"; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:306 */
+			reg = < 0x1c2ac00 0x400 >;              /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:307 */
+			interrupts = < 0x0 0x6 0x2 0xa0 >;      /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:308 */
+			clocks = < &ccu 0x26 >;                 /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:309 */
+			clock-names = "bus";                    /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:310 */
+			resets = < &reset 0x2e >;               /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:311 */
+			clock-frequency = < 0x186a0 >;          /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:312 */
+			#address-cells = < 0x1 >;               /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:313 */
+			#size-cells = < 0x0 >;                  /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:314 */
+			pinctrl-0 = < &i2c0_pins >;             /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:155 */
+			pinctrl-names = "default";              /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:156 */
+			status = "okay";                        /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:157 */
+
+			/* node '/soc/i2c@1c2ac00/ns2009@24' defined in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:158 */
+			ns2009: ns2009@24 {
+				compatible = "nsiway,ns2009";  /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:159 */
+				reg = < 0x48 >;                /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:160 */
+				status = "okay";               /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:161 */
+				screen-width = < 0x320 >;      /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:162 */
+				screen-height = < 0x258 >;     /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:163 */
+				inverted-y;                    /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:164 */
+				touch-threshold = < 0xc8 >;    /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:165 */
+				poll-period-ms = < 0xf >;      /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:166 */
+				release-timeout-ms = < 0x64 >; /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:167 */
+				min-x = < 0x64 >;              /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:174 */
+				max-x = < 0xfa0 >;             /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:175 */
+				min-y = < 0x0 >;               /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:176 */
+				max-y = < 0xe10 >;             /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:177 */
+				phandle = < 0x15 >;            /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:29 */
+			};
+		};
+
+		/* node '/soc/i2c@1c2b000' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:318 */
+		i2c1: i2c@1c2b000 {
+			compatible = "allwinner,sun8i-v3s-i2c"; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:319 */
+			reg = < 0x1c2b000 0x400 >;              /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:320 */
+			interrupts = < 0x0 0x7 0x2 0xa0 >;      /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:321 */
+			clocks = < &ccu 0x27 >;                 /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:322 */
+			clock-names = "bus";                    /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:323 */
+			resets = < &reset 0x2f >;               /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:324 */
+			clock-frequency = < 0x186a0 >;          /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:325 */
+			#address-cells = < 0x1 >;               /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:326 */
+			#size-cells = < 0x0 >;                  /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:327 */
+			status = "disabled";                    /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:328 */
+		};
+
+		/* node '/soc/phy@1c19400' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:331 */
+		usbphy: phy@1c19400 {
+			compatible = "allwinner,sun8i-v3s-usb-phy",
+			             "allwinner,sun4i-usb-phy";     /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:332 */
+			reg = < 0x1c19400 0x2c >,
+			      < 0x1c1a800 0x4 >;                    /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:333 */
+			reg-names = "phy_ctrl",
+			            "pmu0";                         /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:334 */
+			clocks = < &ccu 0x38 >;                     /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:335 */
+			clock-names = "usb0_phy";                   /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:336 */
+			resets = < &reset 0x0 >;                    /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:337 */
+			reset-names = "usb0_reset";                 /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:338 */
+			#phy-cells = < 0x1 >;                       /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:339 */
+			dr-mode = "otg";                            /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:182 */
+			usb0_id_det-gpios = < &gpiof 0x6 0x10 >;    /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:183 */
+			status = "okay";                            /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:205 */
+			phandle = < 0xd >;                          /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:411 */
+		};
+
+		/* node '/soc/mmc@1c0f000' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:343 */
+		mmc0: mmc@1c0f000 {
+			compatible = "allwinner,sunxi-mmc"; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:344 */
+			reg = < 0x1c0f000 0x1000 >;         /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:345 */
+			clocks = < &ccu 0x16 >,
+			         < &ccu 0x2d >,
+			         < &ccu 0x2f >,
+			         < &ccu 0x2e >;             /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:346 */
+			clock-names = "ahb",
+			              "mmc",
+			              "output",
+			              "sample";             /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:348 */
+			resets = < &reset 0x7 >;            /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:349 */
+			reset-names = "ahb";                /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:350 */
+			interrupts = < 0x0 0x3c 0x2 0xa0 >; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:351 */
+			bus-width = < 0x4 >;                /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:352 */
+			max-bus-freq = < 0x2faf080 >;       /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:353 */
+			min-bus-freq = < 0x61a80 >;         /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:354 */
+			pinctrl-0 = < &mmc0_pins >;         /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:198 */
+			pinctrl-names = "default";          /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:199 */
+			frequency = < 0x5f5e100 >;          /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:200 */
+			status = "okay";                    /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:201 */
+
+			/* node '/soc/mmc@1c0f000/sdmmc-disk' defined in emu6502/app.overlay:9 */
+			sdmmc_disk: sdmmc-disk {
+				compatible = "zephyr,sdmmc-disk"; /* in emu6502/app.overlay:10 */
+				disk-name = "SD";                 /* in emu6502/app.overlay:11 */
+				status = "okay";                  /* in emu6502/app.overlay:12 */
+			};
+		};
+
+		/* node '/soc/mmc@1c10000' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:358 */
+		mmc1: mmc@1c10000 {
+			compatible = "allwinner,sunxi-mmc"; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:359 */
+			reg = < 0x1c10000 0x1000 >;         /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:360 */
+			clocks = < &ccu 0x17 >,
+			         < &ccu 0x30 >,
+			         < &ccu 0x32 >,
+			         < &ccu 0x31 >;             /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:361 */
+			clock-names = "ahb",
+			              "mmc",
+			              "output",
+			              "sample";             /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:363 */
+			resets = < &reset 0x8 >;            /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:364 */
+			reset-names = "ahb";                /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:365 */
+			interrupts = < 0x0 0x3d 0x2 0xa0 >; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:366 */
+			bus-width = < 0x4 >;                /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:367 */
+			max-bus-freq = < 0x2faf080 >;       /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:368 */
+			min-bus-freq = < 0x61a80 >;         /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:369 */
+			status = "disabled";                /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:370 */
+		};
+
+		/* node '/soc/mmc@1c11000' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:373 */
+		mmc2: mmc@1c11000 {
+			compatible = "allwinner,sunxi-mmc"; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:374 */
+			reg = < 0x1c11000 0x1000 >;         /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:375 */
+			clocks = < &ccu 0x18 >,
+			         < &ccu 0x33 >,
+			         < &ccu 0x35 >,
+			         < &ccu 0x34 >;             /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:376 */
+			clock-names = "ahb",
+			              "mmc",
+			              "output",
+			              "sample";             /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:378 */
+			resets = < &reset 0x9 >;            /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:379 */
+			reset-names = "ahb";                /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:380 */
+			interrupts = < 0x0 0x3e 0x2 0xa0 >; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:381 */
+			bus-width = < 0x1 >;                /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:382 */
+			max-bus-freq = < 0x2faf080 >;       /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:383 */
+			min-bus-freq = < 0x61a80 >;         /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:384 */
+			status = "disabled";                /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:385 */
+		};
+
+		/* node '/soc/crypto@1c15000' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:388 */
+		crypto: crypto@1c15000 {
+			compatible = "allwinner,sun8i-v3s-crypto"; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:389 */
+			reg = < 0x1c15000 0x1000 >;                /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:390 */
+			interrupts = < 0x0 0x50 0x2 0xa0 >;        /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:391 */
+			clocks = < &ccu 0x14 >,
+			         < &ccu 0x36 >;                    /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:392 */
+			clock-names = "ahb",
+			              "mod";                       /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:393 */
+			resets = < &reset 0x5 >;                   /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:394 */
+			reset-names = "ahb";                       /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:395 */
+			dmas = < &dma 0x10 >,
+			       < &dma 0x10 >;                      /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:396 */
+			dma-names = "rx",
+			            "tx";                          /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:398 */
+			status = "okay";                           /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:218 */
+
+			/* node '/soc/crypto@1c15000/rng' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:401 */
+			rng: rng {
+				compatible = "allwinner,sun8i-v3s-rng"; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:402 */
+				status = "okay";                        /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:222 */
+			};
+		};
+
+		/* node '/soc/usb@1c19000' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:407 */
+		usbotg: zephyr_udc0: usb@1c19000 {
+			compatible = "allwinner,sun8i-v3s-musb"; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:408 */
+			reg = < 0x1c19000 0x400 >;               /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:409 */
+			interrupts = < 0x0 0x47 0x2 0xa0 >;      /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:410 */
+			phys = < &usbphy 0x0 >;                  /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:411 */
+			clocks = < &ccu 0x1d >;                  /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:412 */
+			resets = < &reset 0x11 >;                /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:413 */
+			num-bidir-endpoints = < 0x5 >;           /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:414 */
+			status = "okay";                         /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:188 */
+
+			/* node '/soc/usb@1c19000/cdc_acm_uart0' defined in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:189 */
+			cdc_acm_uart0: cdc_acm_uart0 {
+				compatible = "zephyr,cdc-acm-uart"; /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:190 */
+				label = "USB CDC ACM";              /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:191 */
+				tx-fifo-size = < 0x1000 >;          /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:192 */
+				rx-fifo-size = < 0x1000 >;          /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:193 */
+			};
+		};
+
+		/* node '/soc/codec@1c22c00' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:418 */
+		codec: codec@1c22c00 {
+			compatible = "allwinner,sun8i-v3s-codec";            /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:419 */
+			reg = < 0x1c22c00 0x400 >;                           /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:420 */
+			interrupts = < 0x0 0x1d 0x2 0xa0 >;                  /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:421 */
+			clocks = < &ccu 0x24 >,
+			         < &ccu 0x46 >;                              /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:422 */
+			clock-names = "apb",
+			              "codec";                               /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:423 */
+			resets = < &reset 0x28 >;                            /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:424 */
+			dmas = < &dma 0xf >,
+			       < &dma 0xf >;                                 /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:425 */
+			dma-names = "rx",
+			            "tx";                                    /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:427 */
+			allwinner,codec-analog-controls = < &codec_analog >; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:428 */
+			status = "okay";                                     /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:268 */
+		};
+
+		/* node '/soc/codec-analog@1c23000' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:432 */
+		codec_analog: codec-analog@1c23000 {
+			compatible = "allwinner,sun8i-v3s-codec-analog"; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:433 */
+			reg = < 0x1c23000 0x4 >;                         /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:434 */
+			status = "okay";                                 /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:272 */
+			phandle = < 0xe >;                               /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:428 */
+		};
+
+		/* node '/soc/ethernet@1c30000' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:437 */
+		emac: ethernet@1c30000 {
+			compatible = "allwinner,sun8i-v3s-emac"; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:438 */
+			reg = < 0x1c30000 0x10000 >;             /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:439 */
+			interrupts = < 0x0 0x52 0x2 0xa0 >;      /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:440 */
+			clocks = < &ccu 0x1a >;                  /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:441 */
+			resets = < &reset 0xc >;                 /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:442 */
+			allwinner,phy-addr = < 0x1 >;            /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:443 */
+			phy-handle = < &int_mii_phy >;           /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:444 */
+			phy-connection-type = "mii";             /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:445 */
+			allwinner,leds-active-low;               /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:209 */
+			status = "okay";                         /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:210 */
+
+			/* node '/soc/ethernet@1c30000/mdio' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:448 */
+			mdio: mdio {
+				compatible = "allwinner,sun8i-v3s-mdio"; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:449 */
+				#address-cells = < 0x1 >;                /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:450 */
+				#size-cells = < 0x0 >;                   /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:451 */
+				status = "okay";                         /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:214 */
+
+				/* node '/soc/ethernet@1c30000/mdio/ethernet-phy@1' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:453 */
+				int_mii_phy: ethernet-phy@1 {
+					compatible = "ethernet-phy";            /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:454 */
+					reg = < 0x1 >;                          /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:455 */
+					default-speeds = "10BASE Full-Duplex",
+					                 "100BASE Full-Duplex"; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:456 */
+					phandle = < 0xf >;                      /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:444 */
+				};
+			};
+		};
+
+		/* node '/soc/clock@1000000' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:462 */
+		display_clocks: clock@1000000 {
+			compatible = "allwinner,sun8i-v3s-de2-clk"; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:463 */
+			reg = < 0x1000000 0x10000 >;                /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:464 */
+			clocks = < &ccu 0x23 >,
+			         < &ccu 0x3f >;                     /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:465 */
+			clock-names = "bus",
+			              "mod";                        /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:467 */
+			resets = < &reset 0x22 >;                   /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:469 */
+			#clock-cells = < 0x1 >;                     /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:470 */
+			status = "okay";                            /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:236 */
+			phandle = < 0x10 >;                         /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:482 */
+
+			/* node '/soc/clock@1000000/reset-controller' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:473 */
+			de2_reset: reset-controller {
+				compatible = "allwinner,sun8i-de2-reset"; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:474 */
+				#reset-cells = < 0x1 >;                   /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:475 */
+				phandle = < 0x11 >;                       /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:486 */
+			};
+		};
+
+		/* node '/soc/mixer@1100000' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:479 */
+		mixer0: mixer@1100000 {
+			compatible = "allwinner,sun8i-v3s-de2-mixer"; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:480 */
+			reg = < 0x1100000 0x100000 >;                 /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:481 */
+			clocks = < &display_clocks 0x0 >,
+			         < &display_clocks 0x6 >;             /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:482 */
+			clock-names = "bus",
+			              "mod";                          /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:484 */
+			resets = < &de2_reset 0x0 >;                  /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:486 */
+			tcon = < &tcon0 >;                            /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:487 */
+			status = "okay";                              /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:240 */
+			width = < 0x320 >;                            /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:241 */
+			height = < 0x258 >;                           /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:242 */
+			pixel-format = < 0x10 >;                      /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:243 */
+		};
+
+		/* node '/soc/tcon@1c0c000' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:491 */
+		tcon0: tcon@1c0c000 {
+			compatible = "allwinner,sun8i-v3s-tcon"; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:492 */
+			reg = < 0x1c0c000 0x1000 >;              /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:493 */
+			interrupts = < 0x0 0x56 0x2 0xa0 >;      /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:494 */
+			clocks = < &ccu 0x21 >,
+			         < &ccu 0x40 >;                  /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:495 */
+			clock-names = "ahb",
+			              "tcon-ch0";                /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:497 */
+			resets = < &reset 0x1b >;                /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:499 */
+			reset-names = "lcd";                     /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:500 */
+			status = "okay";                         /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:247 */
+			pinctrl-0 = < &lcd_rgb_pins >;           /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:248 */
+			pinctrl-names = "default";               /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:249 */
+			backlight = < &pwm 0x0 0x3e8 >;          /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:250 */
+			phandle = < 0x12 >;                      /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:487 */
+
+			/* node '/soc/tcon@1c0c000/display-timings' defined in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:251 */
+			display-timings {
+				compatible = "zephyr,panel-timing"; /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:252 */
+				pixelclk-active = < 0x0 >;          /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:253 */
+				hsync-active = < 0x0 >;             /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:254 */
+				vsync-active = < 0x0 >;             /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:255 */
+				de-active = < 0x1 >;                /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:256 */
+				hsync-len = < 0x80 >;               /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:257 */
+				hback-porch = < 0x58 >;             /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:258 */
+				hfront-porch = < 0x28 >;            /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:259 */
+				vsync-len = < 0x4 >;                /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:260 */
+				vback-porch = < 0x17 >;             /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:261 */
+				vfront-porch = < 0x1 >;             /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:262 */
+				clock-frequency = < 0x2625a00 >;    /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:263 */
+			};
+		};
+	};
+
+	/* node '/cpus' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:30 */
+	cpus {
+		#address-cells = < 0x1 >; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:31 */
+		#size-cells = < 0x0 >;    /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:32 */
+
+		/* node '/cpus/cpu@0' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:34 */
+		cpu0: cpu@0 {
+			compatible = "arm,cortex-a7";     /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:35 */
+			device_type = "cpu";              /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:36 */
+			reg = < 0x0 >;                    /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:37 */
+			clock-frequency = < 0x3c14dc00 >; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:38 */
+		};
+	};
+
+	/* node '/timer' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:42 */
+	arch_timer: timer {
+		compatible = "arm,armv8-timer";    /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:43 */
+		clock-frequency = < 0x16e3600 >;   /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:44 */
+		status = "okay";                   /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:45 */
+		interrupts = < 0x1 0xd 0x2 0xa0 >,
+		             < 0x1 0xe 0x2 0xa0 >,
+		             < 0x1 0xb 0x2 0xa0 >,
+		             < 0x1 0xa 0x2 0xa0 >; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:46 */
+		interrupt-parent = < &gic >;       /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:50 */
+	};
+
+	/* node '/osc24M' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:54 */
+	osc24M: osc24M {
+		compatible = "fixed-clock";      /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:55 */
+		clock-frequency = < 0x16e3600 >; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:56 */
+		#clock-cells = < 0x0 >;          /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:57 */
+		#clock-source-cells = < 0x0 >;   /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:58 */
+		phandle = < 0x3 >;               /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:105 */
+	};
+
+	/* node '/osc32k' defined in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:61 */
+	osc32k: osc32k {
+		compatible = "fixed-clock";   /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:62 */
+		clock-frequency = < 0x8000 >; /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:63 */
+		#clock-cells = < 0x0 >;       /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:64 */
+		phandle = < 0x2 >;            /* in zephyr/dts/arm/allwinner/sun8i-v3s.dtsi:96 */
+	};
+
+	/* node '/lvgl_pointer' defined in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:27 */
+	lvgl_pointer {
+		compatible = "zephyr,lvgl-pointer-input"; /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:28 */
+		input = < &ns2009 >;                      /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:29 */
+	};
+
+	/* node '/leds' defined in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:32 */
+	leds {
+		compatible = "gpio-leds"; /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:33 */
+
+		/* node '/leds/led_0' defined in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:34 */
+		green_led: led_0 {
+			gpios = < &gpiog 0x0 0x1 >; /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:35 */
+			label = "Green LED";        /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:36 */
+		};
+
+		/* node '/leds/led_1' defined in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:38 */
+		blue_led: led_1 {
+			gpios = < &gpiog 0x1 0x1 >; /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:39 */
+			label = "Blue LED";         /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:40 */
+		};
+
+		/* node '/leds/led_2' defined in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:42 */
+		red_led: led_2 {
+			gpios = < &gpiog 0x2 0x1 >; /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:43 */
+			label = "Red LED";          /* in zephyr/boards/sipeed/lichee_zero/lichee_zero.dts:44 */
+		};
+	};
+
+	/* node '/fstab' defined in emu6502/app.overlay:17 */
+	fstab {
+		compatible = "zephyr,fstab"; /* in emu6502/app.overlay:18 */
+
+		/* node '/fstab/sd_fs' defined in emu6502/app.overlay:20 */
+		sd_fs: sd_fs {
+			compatible = "zephyr,fstab,fatfs"; /* in emu6502/app.overlay:21 */
+			disk-access;                       /* in emu6502/app.overlay:22 */
+			mount-point = "/SD:";              /* in emu6502/app.overlay:23 */
+		};
+	};
+};

@@ -1,0 +1,26 @@
+/*
+ * NES Emulator - lichee_zero DTS overlay
+ *
+ * SD 卡节点: V3s mmc0 连接 SD 卡槽, 使用 zephyr,sdmmc-disk
+ * LCD 显示 + 触摸屏由 V3s board defconfig 预设, 无需在此声明
+ */
+
+&mmc0 {
+	sdmmc_disk: sdmmc-disk {
+		compatible = "zephyr,sdmmc-disk";
+		disk-name = "SD";
+		status = "okay";
+	};
+};
+
+/ {
+	fstab {
+		compatible = "zephyr,fstab";
+
+		sd_fs: sd_fs {
+			compatible = "zephyr,fstab,fatfs";
+			disk-access;
+			mount-point = "/SD:";
+		};
+	};
+};

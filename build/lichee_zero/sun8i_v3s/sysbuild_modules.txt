@@ -1,0 +1,1 @@
+"mcuboot":"/home/juno/Documents/zephyrproject/bootloader/mcuboot":"/home/juno/Documents/zephyrproject/bootloader/mcuboot/boot/zephyr/sysbuild"

@@ -1,0 +1,2 @@
+# Load board Kconfig descriptions.
+osource "/home/juno/Documents/zephyrproject/zephyr/boards/sipeed/lichee_zero/Kconfig.lichee_zero"

@@ -1,0 +1,64 @@
+cmake:
+  application:
+    configuration-dir: '/home/juno/Documents/zephyrproject/emu6502'
+    source-dir: '/home/juno/Documents/zephyrproject/emu6502'
+  board:
+    name: 'lichee_zero'
+    path:
+     - '/home/juno/Documents/zephyrproject/zephyr/boards/sipeed/lichee_zero'
+    qualifiers: 'sun8i_v3s'
+    revision: ''
+  devicetree:
+    bindings-dirs:
+     - '/home/juno/Documents/zephyrproject/zephyr/dts/bindings'
+    files:
+     - '/home/juno/Documents/zephyrproject/zephyr/boards/sipeed/lichee_zero/lichee_zero.dts'
+     - '/home/juno/Documents/zephyrproject/emu6502/app.overlay'
+    include-dirs:
+     - '/home/juno/Documents/zephyrproject/modules/hal/ambiq/dts'
+     - '/home/juno/Documents/zephyrproject/modules/hal/atmel/include'
+     - '/home/juno/Documents/zephyrproject/modules/hal/bouffalolab/include'
+     - '/home/juno/Documents/zephyrproject/modules/hal/bouffalolab/include/zephyr'
+     - '/home/juno/Documents/zephyrproject/modules/hal/gigadevice/include'
+     - '/home/juno/Documents/zephyrproject/modules/hal/microchip/include'
+     - '/home/juno/Documents/zephyrproject/modules/hal/microchip/dts'
+     - '/home/juno/Documents/zephyrproject/modules/hal/nuvoton/dts'
+     - '/home/juno/Documents/zephyrproject/modules/hal/nxp/dts'
+     - '/home/juno/Documents/zephyrproject/modules/hal/stm32/dts'
+     - '/home/juno/Documents/zephyrproject/modules/hal/ti/dts'
+     - '/home/juno/Documents/zephyrproject/zephyr/include'
+     - '/home/juno/Documents/zephyrproject/zephyr/include/zephyr'
+     - '/home/juno/Documents/zephyrproject/zephyr/dts/common'
+     - '/home/juno/Documents/zephyrproject/zephyr/dts/vendor'
+     - '/home/juno/Documents/zephyrproject/zephyr/dts/rx'
+     - '/home/juno/Documents/zephyrproject/zephyr/dts/x86'
+     - '/home/juno/Documents/zephyrproject/zephyr/dts/xtensa'
+     - '/home/juno/Documents/zephyrproject/zephyr/dts/sparc'
+     - '/home/juno/Documents/zephyrproject/zephyr/dts/riscv'
+     - '/home/juno/Documents/zephyrproject/zephyr/dts/posix'
+     - '/home/juno/Documents/zephyrproject/zephyr/dts/arm64'
+     - '/home/juno/Documents/zephyrproject/zephyr/dts/arm'
+     - '/home/juno/Documents/zephyrproject/zephyr/dts/arc'
+     - '/home/juno/Documents/zephyrproject/zephyr/dts'
+    user-files:
+     - '/home/juno/Documents/zephyrproject/emu6502/app.overlay'
+  kconfig:
+    files:
+     - '/home/juno/Documents/zephyrproject/zephyr/boards/sipeed/lichee_zero/lichee_zero_defconfig'
+     - '/home/juno/Documents/zephyrproject/emu6502/prj.conf'
+     - '/home/juno/Documents/zephyrproject/emu6502/boards/lichee_zero.conf'
+     - '/home/juno/Documents/zephyrproject/emu6502/build/lichee_zero/sun8i_v3s/zephyr/misc/generated/extra_kconfig_options.conf'
+    user-files:
+     - '/home/juno/Documents/zephyrproject/emu6502/prj.conf'
+     - '/home/juno/Documents/zephyrproject/emu6502/boards/lichee_zero.conf'
+  toolchain:
+    name: 'zephyr'
+    path: '/home/juno/.zephyr_ide/toolchains/zephyr-sdk-1.0.1'
+  zephyr:
+    version: '4.4.99'
+    zephyr-base: '/home/juno/Documents/zephyrproject/zephyr'
+version: '0.1.0'
+west:
+  command: '/home/juno/Documents/zephyrproject/.venv/bin/west build -b lichee_zero/sun8i_v3s /home/juno/Documents/zephyrproject/emu6502 -p --build-dir /home/juno/Documents/zephyrproject/emu6502/build/lichee_zero/sun8i_v3s -- -DBOARD_ROOT=/home/juno/Documents/zephyrproject/zephyr -DCONFIG_DEBUG_OPTIMIZATIONS=y -DCONFIG_DEBUG_THREAD_INFO=y'
+  topdir: '/home/juno/Documents/zephyrproject'
+  version: '1.5.0'
